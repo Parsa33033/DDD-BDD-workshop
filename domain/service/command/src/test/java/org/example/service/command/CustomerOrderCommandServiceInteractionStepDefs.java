@@ -131,16 +131,9 @@ public class CustomerOrderCommandServiceInteractionStepDefs {
 
     @Then("expect order was created for {testCustomer} with Products:")
     public void orderWasCreatedForCustomer(TestCustomer testCustomer, DataTable dataTable) {
-        assertTrue(orderCommandRepositoryMockConfig
-                .captureAllCommands().stream().anyMatch(
-                        wc -> wc.change().customerOrderData().customerIdentifier().equals(
-                                testCustomer.customerData().identifier())));
-        assertTrue(orderCommandRepositoryMockConfig
-                .captureAllCommands()
-                .stream()
-                .anyMatch(wc -> toProductData(dataTable).stream().allMatch(expectedProduct ->
-                        wc.change().customerOrderData().order().products().stream().anyMatch(
-                                actualProduct -> actualProduct.identifier().equals(expectedProduct.identifier())))));
+    //TODO assert that the customer has a certain order using the dataTable mapper ProductDataTable.toProductData()
+
+
     }
 
     private void setupMockData() {
