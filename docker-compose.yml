@@ -1,0 +1,51 @@
+version: '2.1'
+
+services:
+  postgres:
+    container_name: ${DB_HOST}
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    networks:
+      - default
+      - example_net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: none
+  example:
+    container_name: example
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "cd /usr/src/example &&
+      mvn clean package &&
+      cd /usr/src/example/application/target &&
+      java -jar application-1.0-SNAPSHOT.jar"
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    environment:
+      - PROFILE=${PROFILE}
+      - APP_PORT=${APP_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB=${DB}
+      - DB_PORT=${DB_PORT}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - example_net
+
+networks:
+  example_net:
+    driver: bridge
