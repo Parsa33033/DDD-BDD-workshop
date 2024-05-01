@@ -1,4 +1,4 @@
-Feature: Ensure customer
+Feature: customer order
 
       ### Success Scenarios ###
 
