@@ -39,7 +39,8 @@ public class CustomerOrder implements AggregateRoot<CustomerOrder, CustomerOrder
 
     public Result<CustomerOrderChange, CustomerOrderError> createOrder() {
         // TODO create an order for the customer
-        // when the order is created the cart should be empty and product stockAmount should decrease by 1
+        // when the order is created the cart should be empty and
+        // product stockAmount should decrease by the amount of product ordered
         throw new RuntimeException("not implemented");
     }
 

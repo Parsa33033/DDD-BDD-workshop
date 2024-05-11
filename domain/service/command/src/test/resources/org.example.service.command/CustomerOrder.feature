@@ -13,5 +13,5 @@ Feature: Ensure customer
     ### Functional Errors (Available errors are in CustomerOrderReadError & CustomerOrderError) ###
 
 
-    ### Functional Errors (ERROR STORAGE_NOT_FOUND) ###
+    ### Technical Exception (ERROR STORAGE_NOT_FOUND) ###
 
