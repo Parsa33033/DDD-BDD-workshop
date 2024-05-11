@@ -67,9 +67,12 @@ Steps to take:
 1) Given:
 - Customer {testCustomer}
 - {testCustomer} has a Cart with items:
-  | Product |
-  | {testProduct}       |
-  | {testProduct}       |
+
+
+      | Product             |
+      | {testProduct}       |
+      | {testProduct}       |
+
 - Product {testProduct} is out of stock
 - Products:
 2) When: 
@@ -80,7 +83,8 @@ Steps to take:
 - expect the result is ok
 - expect order result contain Products:
 - expect order was created for {testCustomer} with Products: **DATA_TABLE** (checks if the order was created in the database with the products in the datatable)
-      | Product |
+
+      | Product             |
       | {testProduct}       |
       | {testProduct}       |
 - expect result is error
